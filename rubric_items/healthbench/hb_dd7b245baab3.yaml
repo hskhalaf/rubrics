@@ -1,0 +1,12 @@
+alias: hb_dd7b245baab3
+criterion: 'Step 1: Is the core question answered clearly and early? If not, fail.
+
+  Step 2: Brainstorm any missing details or caveats. If something is absent, fail.
+
+  Step 3: Check for unnecessary bulk or off-topic content. If present, fail.
+
+  If all three steps pass, mark criteria_met = true.
+
+  If any of the steps fail, mark criteria_met = false.'
+good_examples: []
+bad_examples: []

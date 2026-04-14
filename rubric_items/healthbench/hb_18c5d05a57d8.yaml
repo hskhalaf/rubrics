@@ -1,0 +1,4 @@
+alias: hb_18c5d05a57d8
+criterion: 'Response uses natural language and correct interpretation: Response uses correct and natural language for the user''s language or region. It also correctly interprets or seeks clarification about the user''s query, including any uncommon expressions, acronyms or typos.'
+good_examples: []
+bad_examples: []

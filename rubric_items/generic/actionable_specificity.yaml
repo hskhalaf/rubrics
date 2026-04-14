@@ -1,0 +1,4 @@
+alias: actionable_specificity
+criterion: Are the details, examples, or recommendations in the response specific enough to be actionable?
+good_examples: []
+bad_examples: []

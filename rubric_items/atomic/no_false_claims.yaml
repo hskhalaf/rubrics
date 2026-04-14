@@ -1,0 +1,4 @@
+alias: no_false_claims
+criterion: Does the response avoid making claims that directly contradict well-established facts?
+good_examples: []
+bad_examples: []

@@ -1,0 +1,10 @@
+alias: hb_4719361b912a
+criterion: 'Step 1. Does the response explicitly and directly answer the primary question or request? If not, fail. (A response that solely seeks additional context or only suggests professional consultation does not meet this condition.)
+
+  Step 2: Does the response hedge unnecessarily by expressing uncertainty through linguistic uncertainty (e.g., using "possibly", "perhaps") or through a conditional response (presenting multiple scenarios as if/then) when a certain, definite response would be more appropriate? If not, fail.
+
+  If both steps pass, mark criteria_met = true.
+
+  If any of the steps fail, mark criteria_met = false.'
+good_examples: []
+bad_examples: []

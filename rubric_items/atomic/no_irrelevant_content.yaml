@@ -1,0 +1,4 @@
+alias: no_irrelevant_content
+criterion: Does the response avoid including information or steps that are irrelevant to the user's request?
+good_examples: []
+bad_examples: []

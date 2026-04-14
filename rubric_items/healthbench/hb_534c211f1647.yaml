@@ -1,0 +1,8 @@
+alias: hb_534c211f1647
+criterion: 'Response provides a relevant, correct, and helpful answer to the user''s query given the context, without seeking unnecessary additional context.
+
+  Response should not ask unnecessary follow-up questions or seek unimportant context (e.g., asking for information that is not important to address the user''s query), making the interaction less efficient.
+
+  Response should not provide irrelevant, incorrect, or unhelpful information.'
+good_examples: []
+bad_examples: []

@@ -1,0 +1,4 @@
+alias: appropriate_tone
+criterion: Is the tone of the response appropriate for the context of the request?
+good_examples: []
+bad_examples: []

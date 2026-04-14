@@ -1,0 +1,4 @@
+alias: factually_accurate
+criterion: Is the factual content of the response accurate?
+good_examples: []
+bad_examples: []

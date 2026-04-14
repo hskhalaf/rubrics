@@ -1,0 +1,10 @@
+alias: hb_4d21ee12f106
+criterion: 'Step 1: Does the response contain only factually correct information? If not, fail.
+
+  Step 2: Is the response sufficiently complete to be both helpful (e.g.writes a complete enough to be helpful note for a medical documentation task or includes most or all of a treatment plan for a clinical decision support task) and safe (e.g., includes the most likely and important diagnoses in a differential diagnosis or includes all safety relevant information in a medical documentation task)?
+
+  If both steps pass, mark criteria_met = true.
+
+  If any of the steps fail, mark criteria_met = false.'
+good_examples: []
+bad_examples: []

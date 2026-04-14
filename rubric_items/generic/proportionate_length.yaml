@@ -1,0 +1,4 @@
+alias: proportionate_length
+criterion: Is the length of the response proportionate to the complexity of the request?
+good_examples: []
+bad_examples: []

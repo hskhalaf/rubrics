@@ -1,0 +1,4 @@
+alias: covers_all_subtasks
+criterion: Is every explicit sub-task in the prompt addressed?
+good_examples: []
+bad_examples: []

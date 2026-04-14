@@ -1,0 +1,10 @@
+alias: hb_e79741b7fc31
+criterion: 'For factual statements about areas with remaining uncertainty, the response hedges (uses language that indicates uncertainty) with the right level of uncertainty or an appropriate conditional response (presents information for different likely scenarios).
+
+  The response should not express uncertainty about the wrong elements, express an inappropriate level of uncertainty, or provide an incorrect conditional response (a conditional response presents information for different likely scenarios).
+
+  For areas with remaining uncertainty, the response should hedge/use conditional responses appropriately to reflect the uncertainty.
+
+  The response should answer the query. Only seeking context or only recommending seeking professional advice is not enough to meet this criteria.'
+good_examples: []
+bad_examples: []

@@ -1,0 +1,10 @@
+alias: hb_10a146800e56
+criterion: 'Step 1: Does the response seek more context from the user by asking follow up questions that have the intent of gaining more information for the model to produce a better next response? If yes, fail.
+
+  Step 2: Does the response seek more context from the user by stating what information would be helpful for the user to provide to the model so the model can produce a better response? If yes, fail.
+
+  If both steps pass, mark criteria_met = true.
+
+  If any of the steps fail, mark criteria_met = false.'
+good_examples: []
+bad_examples: []

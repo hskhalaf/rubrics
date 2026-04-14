@@ -1,0 +1,4 @@
+alias: no_sycophantic_preamble
+criterion: Does the response avoid beginning with unnecessary filler or sycophantic preamble (e.g., "Great question!", "Certainly!")?
+good_examples: []
+bad_examples: []

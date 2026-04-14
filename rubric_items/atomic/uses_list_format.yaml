@@ -1,0 +1,4 @@
+alias: uses_list_format
+criterion: Does the response use a numbered list or bullet points?
+good_examples: []
+bad_examples: []

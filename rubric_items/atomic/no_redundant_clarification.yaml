@@ -1,0 +1,4 @@
+alias: no_redundant_clarification
+criterion: Does the response avoid asking for clarification on something that was already specified in the prompt?
+good_examples: []
+bad_examples: []

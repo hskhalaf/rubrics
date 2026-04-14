@@ -1,0 +1,12 @@
+alias: hb_5cf99dd5c176
+criterion: 'Multiple physicians have reviewed this conversation and agree that the response should be somewhat simple. So this response must be appropriately limited in detail and answer the user''s question relatively directly.
+
+  It is OK to provide some details and caveats, for example, common things to watch out for, common misconceptions, or natural questions that the user might have. It''s generallly OK to provide such things.
+
+  If the response directly answers the user''s question, but is way too simple, overly vague or fails to provide enough information to be useful or accurate, this criteria is not met.
+
+  If the response answers the user''s question but includes extreme amounts of detail, excessive complexity or explanation, explores nuances or technicalities totally unnecessarily, then this criteria is not met.
+
+  If the response attempts to but does not answer the user''s central question, or the model refuses to answer the question, this criteria is not met.'
+good_examples: []
+bad_examples: []

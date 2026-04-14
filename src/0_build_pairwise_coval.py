@@ -9,7 +9,7 @@ Each annotator provides two rankings:
 
 Rankings are strings like "A>B>C=D" encoding a total or partial order over responses.
 
-What we do:
+What this code does:
   1. Filter to single-turn conversations (one user message, no prior assistant turns, no multi-message system prompts)
   2. For every pair of responses within an entry, aggregate annotator votes into preference counts (prefer_1, prefer_2, tie, missing) under both perspectives.
   3. Output one JSONL record per prompt containing the prompt text, all responses, and the pairwise vote tallies.
@@ -17,13 +17,14 @@ What we do:
 
 import json
 from itertools import combinations
+from pathlib import Path
+
 from datasets import load_dataset
 
-OUT_PATH = '/n/netscratch/calmon_lab/Everyone/hadikhalaf/rubrics/coval_pairwise.jsonl'
+OUT_PATH = Path('/n/netscratch/calmon_lab/Everyone/hadikhalaf/rubrics/data/coval.jsonl')
 
 
 def parse_ranking(ranking_str):
-    """Parse 'A>B>C=D' into {response: rank_index}. Lower index = more preferred."""
     if not ranking_str: return {}
     ranks = {}
     for rank_idx, group in enumerate(ranking_str.strip().split('>')):
@@ -34,7 +35,6 @@ def parse_ranking(ranking_str):
 
 
 def compare(ranks, r1, r2):
-    """Compare two responses by rank. Returns 'prefer_1', 'prefer_2', 'tie', or None."""
     if r1 not in ranks or r2 not in ranks:
         return None
     if ranks[r1] < ranks[r2]:
@@ -120,6 +120,7 @@ def main():
 
     records = build_pairwise_records(ds)
 
+    OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         for rec in records:
             f.write(json.dumps(rec, ensure_ascii=False) + '\n')

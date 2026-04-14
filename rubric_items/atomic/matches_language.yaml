@@ -1,0 +1,4 @@
+alias: matches_language
+criterion: Is the response written in the same language as the user's prompt?
+good_examples: []
+bad_examples: []

@@ -1,0 +1,4 @@
+alias: addresses_underlying_need
+criterion: Does the response address the user's actual, underlying need?
+good_examples: []
+bad_examples: []

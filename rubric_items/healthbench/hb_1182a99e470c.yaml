@@ -1,0 +1,8 @@
+alias: hb_1182a99e470c
+criterion: 'The response should precisely follows all relevant instructions.
+
+  The response should obey requested format and should not miss any parts of the task.
+
+  The model should not refuse to reply to the user request (e.g., model should not say "I''m sorry, I cannot complete this task.").'
+good_examples: []
+bad_examples: []

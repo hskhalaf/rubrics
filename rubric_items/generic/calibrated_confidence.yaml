@@ -1,0 +1,4 @@
+alias: calibrated_confidence
+criterion: Does the response calibrate its confidence appropriately, hedging on uncertain or contested claims?
+good_examples: []
+bad_examples: []

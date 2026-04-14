@@ -1,19 +1,21 @@
 """
 Build a pairwise preference dataset from Facebook's Community Alignment dataset.
 
-Each row in the CA dataset contains a prompt, four model responses (A, B, C, D), and one annotator's preferred response over the four responses.
+Each row contains a prompt, four model responses (A, B, C, D), and one annotator's preferred response over the four responses.
 Multiple rows can share the same (prompt, responses) tuple, each from a different annotator.
 
-What we do:
+What this code does:
   1. Group rows by unique (prompt + 4 responses) to collect all annotator votes per entry.
   2. For every pair of responses (6 pairs from 4 responses), count how many annotators
-     preferred each side. Note: annotators pick one favorite out of four, so a vote for A
+     preferred each response over another. Note: annotators pick one favorite out of four, so a vote for A
      counts as preferring A over B, A over C, and A over D — but says nothing about B vs C.
   3. Output one JSONL record per entry with the prompt, responses, and pairwise vote tallies.
 """
 
 import json
 from itertools import combinations
+from pathlib import Path
+
 from datasets import load_dataset
 
 RESPONSE_KEYS = ['A', 'B', 'C', 'D']
@@ -23,11 +25,10 @@ FIELD_TO_KEY = {
     'response_c': 'C',
     'response_d': 'D',
 }
-OUT_PATH = '/n/netscratch/calmon_lab/Everyone/hadikhalaf/rubrics/community_pairwise.jsonl'
+OUT_PATH = Path('/n/netscratch/calmon_lab/Everyone/hadikhalaf/rubrics/data/community.jsonl')
 
 
 def group_by_conversation(ds):
-    """Group rows by unique (prompt + 4 responses) to collect all annotator votes."""
     convos = {}
     for row in ds:
         key = (row['first_turn_prompt'],
@@ -116,6 +117,7 @@ def main():
 
     records = build_pairwise_records(convos)
 
+    OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         for rec in records:
             f.write(json.dumps(rec, ensure_ascii=False) + '\n')
