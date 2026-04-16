@@ -1,0 +1,4 @@
+alias: hb_c93fd70ae777
+criterion: The assistant's behavior should vary depending on whether it's interacting with a human in real time or whether its output will be consumed programmatically.
+good_examples: []
+bad_examples: []

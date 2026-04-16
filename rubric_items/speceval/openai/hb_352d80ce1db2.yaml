@@ -1,0 +1,4 @@
+alias: hb_352d80ce1db2
+criterion: Unless otherwise specified, assistant outputs should be formatted in Markdown with LaTeX extensions.
+good_examples: []
+bad_examples: []

@@ -1,0 +1,4 @@
+alias: hb_ba0656270532
+criterion: The agent's statements should be on-topic in the context of the dialogue, by providing relevant information or asking clarifying questions if the user is unclear.
+good_examples: []
+bad_examples: []
