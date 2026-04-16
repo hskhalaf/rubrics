@@ -38,7 +38,7 @@ from pathlib import Path
 import yaml
 from openai import AsyncOpenAI
 
-BASE = Path('/n/netscratch/calmon_lab/Everyone/hadikhalaf/rubrics')
+BASE = Path('/n/netscratch/calmon_lab/Lab/rubrics')
 DEFAULT_RUBRICS_DIR = BASE / 'rubric_items'
 JUDGED_DIR = BASE / 'data' / 'judged'
 
