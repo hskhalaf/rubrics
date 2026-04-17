@@ -26,6 +26,7 @@ import glob
 from pathlib import Path
 
 import yaml
+import argparse
 
 DATA_PATH = Path('/n/netscratch/calmon_lab/Lab/datasets')
 SPEC = "anthropic"
@@ -45,6 +46,14 @@ def make_alias(criterion):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Build rubric YAMLs and a JSONL dataset for SpecEval.')
+    parser.add_argument('--provider', type=str, default='openai', help='LLM provider (default: openai)')
+    args = parser.parse_args()
+
+    SPEC = args.provider
+    DATA_OUT = BASE / 'data' / 'speceval' / SPEC / 'speceval.jsonl'
+    RUBRICS_OUT_DIR = BASE / 'rubric_items' / 'speceval' / SPEC
+
     RUBRICS_OUT_DIR.mkdir(parents=True, exist_ok=True)
     DATA_OUT.parent.mkdir(parents=True, exist_ok=True)
 

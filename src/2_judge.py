@@ -37,10 +37,12 @@ from pathlib import Path
 
 import yaml
 from openai import AsyncOpenAI
+from tqdm import tqdm
 
 BASE = Path('/n/netscratch/calmon_lab/Lab/rubrics')
 DEFAULT_RUBRICS_DIR = BASE / 'rubric_items'
 JUDGED_DIR = BASE / 'data' / 'judged'
+SPECEVAL_PROVIDERS = ('anthropic', 'google', 'openai')
 
 CONCURRENCY = 512
 TEMPERATURE = 0.8
@@ -204,17 +206,27 @@ async def run(rows, row_state, pending, work, out_path, model, cot, k, port):
 
 def main():
     parser = argparse.ArgumentParser(description='Score responses on rubrics via vLLM')
-    parser.add_argument('--data', required=True, type=Path, help='input jsonl with prompt/response rows')
-    parser.add_argument('--out', type=Path, default=None, help='output jsonl (default: data/judged/<stem>__<model>_<cot>.jsonl)')
+    parser.add_argument('--provider', choices=SPECEVAL_PROVIDERS, default=None,
+                        help=f'speceval provider {SPECEVAL_PROVIDERS}; auto-sets --data and --rubrics')
+    parser.add_argument('--data', type=Path, default=None, help='input jsonl with prompt/response rows')
+    parser.add_argument('--out', type=Path, default=None, help='output jsonl (default: data/judged/<stem>_<model>_<cot>.jsonl)')
     parser.add_argument('--model', required=True)
     parser.add_argument('--cot', action='store_true', dest='cot')
     parser.add_argument('--no-cot', action='store_false', dest='cot')
     parser.add_argument('--port', type=int, default=8000)
     parser.add_argument('-k', '--k', type=int, default=5, help='samples per (row, rubric)')
-    parser.add_argument('--rubrics', type=Path, default=DEFAULT_RUBRICS_DIR, help='folder containing rubric yaml files (searched recursively)')
+    parser.add_argument('--rubrics', type=Path, default=None, help='folder containing rubric yaml files (searched recursively)')
     parser.add_argument('--resume', action='store_true', help='reuse already-scored (row, rubric) pairs from the output file')
     parser.set_defaults(cot=False)
     args = parser.parse_args()
+
+    if args.provider:
+        args.data = args.data or (BASE / 'data' / 'speceval' / args.provider / 'speceval.jsonl')
+        args.rubrics = args.rubrics or (BASE / 'rubric_items' / 'speceval' / args.provider)
+    else:
+        if args.data is None:
+            parser.error('--data is required when --provider is not specified')
+        args.rubrics = args.rubrics or DEFAULT_RUBRICS_DIR
 
     all_rubrics = load_rubrics(args.rubrics)
     rubric_by_alias = {r['alias']: r for r in all_rubrics}
@@ -224,7 +236,8 @@ def main():
 
     slug = args.model.replace('/', '_').replace('.', '-')
     cot_tag = 'cot' if args.cot else 'nocot'
-    out_path = args.out or (JUDGED_DIR / f'{args.data.stem}__{slug}_{cot_tag}.jsonl')
+    prefix = f'speceval_{args.provider}' if args.provider else args.data.stem
+    out_path = args.out or (JUDGED_DIR / f'{prefix}_{slug}_{cot_tag}.jsonl')
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     existing = load_existing_judge(out_path) if args.resume else {}
@@ -234,7 +247,7 @@ def main():
     row_state = []
     pending = []
     work = []
-    for idx, row in enumerate(rows):
+    for idx, row in tqdm(enumerate(rows)):
         if 'prompt' not in row or 'response' not in row:
             raise ValueError(f'row {idx} missing prompt/response')
         prior = existing.get(row_key(row), {})
